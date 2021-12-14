@@ -1,12 +1,14 @@
 import Express from "@server/ExpressServer";
+import Config from "@infra/config";
 import Logger from "@infra/logger";
 
 async function main(): Promise<void> {
   try {
-    const server = new Express();
+    const config = Config.SetConfig();
+    const server = new Express(config);
 
     await server.SetupControllers();
-    await server.Start();
+    await server.Start(config.Server.Port);
 
     Logger.Info("Main", "Ready to Go!");
   } catch (ex) {

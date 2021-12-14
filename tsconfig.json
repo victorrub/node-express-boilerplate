@@ -15,7 +15,8 @@
       "./node_modules/@types",
       "./src/types",
       "./src/domain/types",
-      "./src/domain/exceptions/types"
+      "./src/domain/exceptions/types",
+      "./src/infra/config/types"
     ],
     "esModuleInterop": true,
     "resolveJsonModule": true,

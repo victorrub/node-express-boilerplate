@@ -2,13 +2,15 @@ import { Server } from "@overnightjs/core";
 import cors from "cors";
 import express from "express";
 import Controllers from "@infra/loaders/Controllers";
+import type { ConfigType } from "@infra/config/types";
+import Logger from "@infra/logger";
 import ExpressLogger from "@infra/logger/ExpressLogger";
 
 export default class ExpressServer extends Server {
   private controllersList: Array<any>;
 
-  constructor() {
-    super(true);
+  constructor(config: ConfigType) {
+    super(config.Server.Debug);
     this.subscribeMiddlewares();
   }
 
@@ -25,8 +27,10 @@ export default class ExpressServer extends Server {
         reject(new Error("Controllers must be initialized."));
       }
 
-      this.app.listen(port);
-      resolve();
+      this.app.listen(port, () => {
+        Logger.Info("ExpressServer.Start", `Listening on ${port}`);
+        resolve();
+      });
     });
   }
 

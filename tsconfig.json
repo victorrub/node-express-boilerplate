@@ -16,7 +16,8 @@
       "./src/types",
       "./src/domain/types",
       "./src/domain/exceptions/types",
-      "./src/infra/config/types"
+      "./src/infra/config/types",
+      "./src/infra/request/types"
     ],
     "esModuleInterop": true,
     "resolveJsonModule": true,

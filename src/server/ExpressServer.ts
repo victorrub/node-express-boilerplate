@@ -2,6 +2,7 @@ import { Server } from "@overnightjs/core";
 import cors from "cors";
 import express from "express";
 import Controllers from "@infra/loaders/Controllers";
+import ExpressLogger from "@infra/logger/ExpressLogger";
 
 export default class ExpressServer extends Server {
   private controllersList: Array<any>;
@@ -33,5 +34,6 @@ export default class ExpressServer extends Server {
     this.app.use(cors());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
+    this.app.use(ExpressLogger());
   }
 }

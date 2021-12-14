@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "Postgres2021!"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ~\workspace\.storage\docker-volumes\postgres\dtracker:/var/lib/postgresql/data
+    networks:
+      - postgres-compose-network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "local@dev.io"
+      PGADMIN_DEFAULT_PASSWORD: "PgAdmin2021!"
+    ports:
+      - "8082:80"
+    depends_on:
+      - db
+    networks:
+      - postgres-compose-network
+
+  redis:
+    image: redis
+    command: redis-server --appendonly no
+    ports:
+      - "6379:6379"
+    networks:
+      - postgres-compose-network
+
+networks:
+  postgres-compose-network:
+    driver: bridge

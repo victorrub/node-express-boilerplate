@@ -15,6 +15,14 @@ class Config {
         LogLevel: (process.env.LOG_LEVEL as LogLevelType) || "All",
         Debug: process.env.DEBUG === "true" || false,
       },
+      Database: {
+        Host: process.env.DB_HOST || "",
+        Port: Number(process.env.DB_PORT) || 0,
+        DatabaseName: process.env.DB_NAME || "",
+        User: process.env.DB_USER || "",
+        Password: process.env.DB_PASS || "",
+        Dialect: process.env.DB_DIALECT || "sqlite",
+      },
     };
 
     Logger.Info(

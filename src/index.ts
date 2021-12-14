@@ -1,4 +1,5 @@
 import Express from "@server/ExpressServer";
+import DatabaseContext from "@data/DatabaseContext";
 import Config from "@infra/config";
 import Logger from "@infra/logger";
 
@@ -6,6 +7,8 @@ async function main(): Promise<void> {
   try {
     const config = Config.SetConfig();
     const server = new Express(config);
+
+    await DatabaseContext.Connect(config);
 
     await server.SetupControllers();
     await server.Start(config.Server.Port);

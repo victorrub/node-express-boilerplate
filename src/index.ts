@@ -4,10 +4,12 @@ import RedisContext from "@infra/cache/Redis";
 import Config from "@infra/config";
 import Logger from "@infra/logger";
 
-async function main(): Promise<void> {
+let server: Express;
+
+async function Main(): Promise<void> {
   try {
     const config = Config.SetConfig();
-    const server = new Express(config);
+    server = new Express(config);
 
     await DatabaseContext.Connect(config);
     await RedisContext.Connect(config);
@@ -21,4 +23,23 @@ async function main(): Promise<void> {
   }
 }
 
-main();
+async function GracefulShutdown(): Promise<void> {
+  Logger.Info("Main", "Ending Processes...");
+
+  try {
+    await server.Dispose();
+    await DatabaseContext.Dispose();
+    await RedisContext.Dispose();
+
+    process.exit(0);
+  } catch (ex) {
+    Logger.Error("Main", `Unable to terminate process correctly. ${ex}`);
+    process.exit(1);
+  }
+}
+
+Main();
+
+process.on("SIGINT", GracefulShutdown);
+process.on("SIGTERM", GracefulShutdown);
+process.on("SIGHUP", GracefulShutdown);

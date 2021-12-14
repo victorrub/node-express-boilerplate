@@ -1,4 +1,5 @@
 import Express from "@server/ExpressServer";
+import Logger from "@infra/logger";
 
 async function main(): Promise<void> {
   try {
@@ -7,9 +8,9 @@ async function main(): Promise<void> {
     await server.SetupControllers();
     await server.Start();
 
-    console.log("Ready to Go!");
+    Logger.Info("Main", "Ready to Go!");
   } catch (ex) {
-    console.error(`Unable to start server. ${ex}`);
+    Logger.Error("Main", `Unable to start server. ${ex}`);
   }
 }
 

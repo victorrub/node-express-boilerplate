@@ -23,6 +23,15 @@ class Config {
         Password: process.env.DB_PASS || "",
         Dialect: process.env.DB_DIALECT || "sqlite",
       },
+      Cache: {
+        Host: process.env.REDIS_HOST || "",
+        Port: Number(process.env.REDIS_PORT) || 0,
+        User: process.env.REDIS_USER,
+        Password: process.env.REDIS_PASS,
+        Database: Number(process.env.REDIS_DB) || 0,
+        KeyPrefix: process.env.REDIS_PREFIX,
+        ExpirationTime: Number(process.env.REDIS_EXPIRE_TIME) || 900,
+      },
     };
 
     Logger.Info(

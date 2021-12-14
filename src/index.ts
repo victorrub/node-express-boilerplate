@@ -1,5 +1,6 @@
 import Express from "@server/ExpressServer";
 import DatabaseContext from "@data/DatabaseContext";
+import RedisContext from "@infra/cache/Redis";
 import Config from "@infra/config";
 import Logger from "@infra/logger";
 
@@ -9,6 +10,7 @@ async function main(): Promise<void> {
     const server = new Express(config);
 
     await DatabaseContext.Connect(config);
+    await RedisContext.Connect(config);
 
     await server.SetupControllers();
     await server.Start(config.Server.Port);

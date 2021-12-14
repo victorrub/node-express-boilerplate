@@ -1,6 +1,7 @@
 export declare type ConfigType = {
   Server: ServerConfig;
   Database: DatabaseConfig;
+  Cache: CacheConfig;
 };
 
 declare type ServerConfig = {
@@ -17,6 +18,17 @@ declare type DatabaseConfig = {
   Dialect: string;
   User: string;
   Password: string;
+};
+
+declare type CacheConfig = {
+  ConnectionString?: string;
+  Host?: string;
+  Port?: number;
+  Database?: number;
+  User?: string;
+  Password?: string;
+  KeyPrefix?: string;
+  ExpirationTime: number;
 };
 
 export type LogLevelType =

@@ -15,7 +15,14 @@ module.exports = {
     [
       "module-resolver",
       {
-        alias: {},
+        alias: {
+          "@data": "./src/data",
+          "@domain": "./src/domain",
+          "@services": "./src/domain/services",
+          "@utils": "./src/domain/utils",
+          "@infra": "./src/infra",
+          "@server": "./src/server",
+        },
       },
     ],
     [

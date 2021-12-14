@@ -11,7 +11,7 @@
     "noImplicitAny": false,
     "noEmitOnError": true,
     "strictNullChecks": true,
-    "typeRoots": ["./node_modules/@types", "./src/@types"],
+    "typeRoots": ["./node_modules/@types", "./src/types", "./src/domain/types"],
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
@@ -19,7 +19,14 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@data/*": ["./src/data/*"],
+      "@domain/*": ["./src/domain/*"],
+      "@services/*": ["./src/domain/services/*"],
+      "@utils/*": ["./src/domain/utils/*"],
+      "@infra/*": ["./src/infra/*"],
+      "@server/*": ["./src/server/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "./src/**/*.test.ts", "./src/**/*.spec.ts"]

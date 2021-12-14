@@ -11,7 +11,12 @@
     "noImplicitAny": false,
     "noEmitOnError": true,
     "strictNullChecks": true,
-    "typeRoots": ["./node_modules/@types", "./src/types", "./src/domain/types"],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types",
+      "./src/domain/types",
+      "./src/domain/exceptions/types"
+    ],
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "experimentalDecorators": true,
